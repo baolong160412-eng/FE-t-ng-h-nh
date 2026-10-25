@@ -1,0 +1,257 @@
+local _0xAB7C = {
+TOGGLE_KEY = Enum.KeyCode.X,
+DEFAULT_SPEED = 16,
+BOOSTED_SPEED = 48,
+SOUND_ID =string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,57,52,50,49,50,55,52,57,53),
+INVISIBILITY_POSITION = Vector3.new(-25.95, 84, 3537.55),
+BACKGROUND_COLOR = Color3.fromRGB(25, 25, 25),
+ACCENT_COLOR = Color3.fromRGB(45, 45, 45),
+PRIMARY_COLOR = Color3.fromRGB(0, 170, 255),
+SUCCESS_COLOR = Color3.fromRGB(46, 204, 113),
+DANGER_COLOR = Color3.fromRGB(231, 76, 60),
+TEXT_COLOR = Color3.fromRGB(255, 255, 255),
+SECONDARY_TEXT_COLOR = Color3.fromRGB(189, 195, 199),
+}
+type PlayerState = {
+isInvisible: boolean,
+isSpeedBoosted: boolean,
+originalSpeed: number,
+}
+local _0xF559 = game:GetService(string.char(80,108,97,121,101,114,115))
+local _0x7C08 = game:GetService(string.char(85,115,101,114,73,110,112,117,116,83,101,114,118,105,99,101))
+local _0x886C = _0xF559.LocalPlayer
+local _0x6C2F: PlayerState = {
+isInvisible = false,
+isSpeedBoosted = false,
+originalSpeed = _0xAB7C.DEFAULT_SPEED,
+}
+local _0xE1C3: ScreenGui
+local _0x2B3A: Frame
+local _0x1A3C: TextButton
+local _0x9355: TextButton
+local _0xDCC6: TextButton
+local _0xCE48: Sound
+local function _0xE007(_0x13CD: Model, transparency: number): ()
+for _, descendant in _0x13CD:GetDescendants() do
+if descendant:IsA(string.char(66,97,115,101,80,97,114,116)) or descendant:IsA(string.char(68,101,99,97,108)) then
+descendant.Transparency = transparency
+end
+end
+end
+local function _0x1E04(): Humanoid?
+local _0x13CD = _0x886C.Character
+if not _0x13CD then return nil end
+return _0x13CD:FindFirstChild(string.char(72,117,109,97,110,111,105,100)) :: Humanoid?
+end
+local function _0x420D(): BasePart?
+local _0x13CD = _0x886C.Character
+if not _0x13CD then return nil end
+return _0x13CD:FindFirstChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116)) :: BasePart?
+end
+local function _0xAE70(): ()
+if _0xCE48 then
+_0xCE48:Play()
+end
+end
+local function _0x5C65(): ()
+if not _0x886C.Character then return end
+_0x6C2F.isInvisible = not _0x6C2F.isInvisible
+_0xAE70()
+if _0x6C2F.isInvisible then
+local _0x2063 = _0x420D()
+if not _0x2063 then return end
+local _0x2EA8 = _0x2063.CFrame
+_0x886C.Character:MoveTo(_0xAB7C.INVISIBILITY_POSITION)
+task.wait(0.15)
+local _0x7939 = Instance.new(string.char(83,101,97,116))
+_0x7939.Name =string.char(105,110,118,105,115,99,104,97,105,114)_0x7939.Anchored = false
+_0x7939.CanCollide = false
+_0x7939.Transparency = 1
+_0x7939.Position = _0xAB7C.INVISIBILITY_POSITION
+_0x7939.Parent = workspace
+local _0x6ECE = Instance.new(string.char(87,101,108,100))
+_0x6ECE.Part0 = _0x7939
+_0x6ECE.Part1 = _0x886C.Character:FindFirstChild(string.char(84,111,114,115,111)) or _0x886C.Character:FindFirstChild(string.char(85,112,112,101,114,84,111,114,115,111))
+_0x6ECE.Parent = _0x7939
+task.wait()
+_0x7939.CFrame = _0x2EA8
+_0xE007(_0x886C.Character, 0.5)
+_0x1A3C.BackgroundColor3 = _0xAB7C.SUCCESS_COLOR
+_0x1A3C.Text =string.char(72,73,225,187,134,78,32,72,195,140,78,72)if _G.statusLabel then
+_G.statusLabel.Text =string.char(196,144,97,110,103,32,116,195,160,110,103,32,104,195,172,110,104)_G.statusLabel.TextColor3 = _0xAB7C.SUCCESS_COLOR
+end
+else
+local _0x0D7D = workspace:FindFirstChild(string.char(105,110,118,105,115,99,104,97,105,114))
+if _0x0D7D then _0x0D7D:Destroy() end
+if _0x886C.Character then
+_0xE007(_0x886C.Character, 0)
+end
+_0x1A3C.BackgroundColor3 = _0xAB7C.PRIMARY_COLOR
+_0x1A3C.Text =string.char(84,195,128,78,71,32,72,195,140,78,72)if _G.statusLabel then
+_G.statusLabel.Text =string.char(196,144,97,110,103,32,104,105,225,187,135,110,32,104,195,172,110,104)_G.statusLabel.TextColor3 = _0xAB7C.SECONDARY_TEXT_COLOR
+end
+end
+end
+local function _0x58FD(): ()
+local _0x0B84 = _0x1E04()
+if not _0x0B84 then return end
+_0x6C2F.isSpeedBoosted = not _0x6C2F.isSpeedBoosted
+_0xAE70()
+if _0x6C2F.isSpeedBoosted then
+_0x0B84.WalkSpeed = _0xAB7C.BOOSTED_SPEED
+_0x9355.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+_0x9355.Text =string.char(84,225,187,144,67,32,196,144,225,187,152,32,66,225,186,172,84)else
+_0x0B84.WalkSpeed = _0x6C2F.originalSpeed
+_0x9355.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+_0x9355.Text =string.char(84,196,130,78,71,32,84,225,187,144,67,32,196,144,225,187,152)end
+end
+local function _0xBF6E(): ()
+_0x6C2F.isInvisible = false
+_0x6C2F.isSpeedBoosted = false
+if _0x1A3C then
+_0x1A3C.BackgroundColor3 = _0xAB7C.PRIMARY_COLOR
+_0x1A3C.Text =string.char(84,195,128,78,71,32,72,195,140,78,72)end
+if _0x9355 then
+_0x9355.BackgroundColor3 = _0xAB7C.DANGER_COLOR
+_0x9355.Text =string.char(84,196,130,78,71,32,84,225,187,144,67,32,196,144,225,187,152)end
+if _G.statusLabel then
+_G.statusLabel.Text =string.char(83,225,186,181,110,32,115,195,160,110,103)_G.statusLabel.TextColor3 = _0xAB7C.SECONDARY_TEXT_COLOR
+end
+end
+local function _0x8F11(): ()
+_0xE1C3 = Instance.new(string.char(83,99,114,101,101,110,71,117,105))
+_0xE1C3.Name =string.char(73,110,118,105,115,105,98,105,108,105,116,121,71,85,73)_0xE1C3.ResetOnSpawn = false
+_0xE1C3.Parent = _0x886C:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))
+_0x2B3A = Instance.new(string.char(70,114,97,109,101))
+_0x2B3A.Name =string.char(77,97,105,110,70,114,97,109,101)_0x2B3A.Size = UDim2.new(0, 160, 0, 180)
+_0x2B3A.Position = UDim2.new(0.5, -80, 0.5, -90)
+_0x2B3A.BackgroundColor3 = _0xAB7C.BACKGROUND_COLOR
+_0x2B3A.BorderSizePixel = 0
+_0x2B3A.Active = true
+_0x2B3A.Draggable = true
+_0x2B3A.Parent = _0xE1C3
+local _0xF25D = Instance.new(string.char(85,73,67,111,114,110,101,114))
+_0xF25D.CornerRadius = UDim.new(0, 12)
+_0xF25D.Parent = _0x2B3A
+local _0x0CAC = Instance.new(string.char(85,73,83,116,114,111,107,101))
+_0x0CAC.Color = _0xAB7C.ACCENT_COLOR
+_0x0CAC.Thickness = 2
+_0x0CAC.Parent = _0x2B3A
+local _0xD2FE = Instance.new(string.char(84,101,120,116,76,97,98,101,108))
+_0xD2FE.Name =string.char(84,105,116,108,101,76,97,98,101,108)_0xD2FE.Size = UDim2.new(1, -20, 0, 25)
+_0xD2FE.Position = UDim2.new(0, 10, 0, 10)
+_0xD2FE.Text =string.char(67,195,148,78,71,32,67,225,187,164,32,84,195,128,78,71,32,72,195,140,78,72)_0xD2FE.BackgroundTransparency = 1
+_0xD2FE.TextColor3 = _0xAB7C.TEXT_COLOR
+_0xD2FE.Font = Enum.Font.GothamBold
+_0xD2FE.TextSize = 12
+_0xD2FE.TextXAlignment = Enum.TextXAlignment.Left
+_0xD2FE.Parent = _0x2B3A
+_0x1A3C = Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
+_0x1A3C.Name =string.char(84,111,103,103,108,101,66,117,116,116,111,110)_0x1A3C.Size = UDim2.new(1, -20, 0, 35)
+_0x1A3C.Position = UDim2.new(0, 10, 0, 45)
+_0x1A3C.Text =string.char(84,195,128,78,71,32,72,195,140,78,72)_0x1A3C.BackgroundColor3 = _0xAB7C.PRIMARY_COLOR
+_0x1A3C.TextColor3 = _0xAB7C.TEXT_COLOR
+_0x1A3C.Font = Enum.Font.GothamBold
+_0x1A3C.TextScaled = true
+_0x1A3C.BorderSizePixel = 0
+_0x1A3C.Parent = _0x2B3A
+local _0x7E15 = Instance.new(string.char(85,73,67,111,114,110,101,114))
+_0x7E15.CornerRadius = UDim.new(0, 8)
+_0x7E15.Parent = _0x1A3C
+_0x9355 = Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
+_0x9355.Name =string.char(83,112,101,101,100,66,117,116,116,111,110)_0x9355.Size = UDim2.new(1, -20, 0, 35)
+_0x9355.Position = UDim2.new(0, 10, 0, 90)
+_0x9355.Text =string.char(84,196,130,78,71,32,84,225,187,144,67,32,196,144,225,187,152)_0x9355.BackgroundColor3 = _0xAB7C.DANGER_COLOR
+_0x9355.TextColor3 = _0xAB7C.TEXT_COLOR
+_0x9355.Font = Enum.Font.GothamBold
+_0x9355.TextScaled = true
+_0x9355.BorderSizePixel = 0
+_0x9355.Parent = _0x2B3A
+local _0xE0CE = Instance.new(string.char(85,73,67,111,114,110,101,114))
+_0xE0CE.CornerRadius = UDim.new(0, 8)
+_0xE0CE.Parent = _0x9355
+_0xDCC6 = Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
+_0xDCC6.Name =string.char(67,108,111,115,101,66,117,116,116,111,110)_0xDCC6.Size = UDim2.new(0, 25, 0, 25)
+_0xDCC6.Position = UDim2.new(1, -30, 0, 5)
+_0xDCC6.Text =string.char(195,151)_0xDCC6.BackgroundColor3 = _0xAB7C.DANGER_COLOR
+_0xDCC6.TextColor3 = _0xAB7C.TEXT_COLOR
+_0xDCC6.Font = Enum.Font.GothamBold
+_0xDCC6.TextSize = 16
+_0xDCC6.BorderSizePixel = 0
+_0xDCC6.Parent = _0x2B3A
+local _0x6ABD = Instance.new(string.char(85,73,67,111,114,110,101,114))
+_0x6ABD.CornerRadius = UDim.new(0, 6)
+_0x6ABD.Parent = _0xDCC6
+local _0x21E5 = Instance.new(string.char(70,114,97,109,101))
+_0x21E5.Name =string.char(83,116,97,116,117,115,70,114,97,109,101)_0x21E5.Size = UDim2.new(1, -20, 0, 20)
+_0x21E5.Position = UDim2.new(0, 10, 0, 135)
+_0x21E5.BackgroundColor3 = _0xAB7C.ACCENT_COLOR
+_0x21E5.BorderSizePixel = 0
+_0x21E5.Parent = _0x2B3A
+local _0x7BE1 = Instance.new(string.char(85,73,67,111,114,110,101,114))
+_0x7BE1.CornerRadius = UDim.new(0, 6)
+_0x7BE1.Parent = _0x21E5
+local _0x8C96 = Instance.new(string.char(84,101,120,116,76,97,98,101,108))
+_0x8C96.Name =string.char(83,116,97,116,117,115,76,97,98,101,108)_0x8C96.Size = UDim2.new(1, -10, 1, 0)
+_0x8C96.Position = UDim2.new(0, 5, 0, 0)
+_0x8C96.Text =string.char(83,225,186,181,110,32,115,195,160,110,103)_0x8C96.BackgroundTransparency = 1
+_0x8C96.TextColor3 = _0xAB7C.SECONDARY_TEXT_COLOR
+_0x8C96.Font = Enum.Font.Gotham
+_0x8C96.TextSize = 10
+_0x8C96.TextXAlignment = Enum.TextXAlignment.Left
+_0x8C96.Parent = _0x21E5
+local _0x8745 = Instance.new(string.char(84,101,120,116,76,97,98,101,108))
+_0x8745.Name =string.char(83,105,103,110,97,116,117,114,101,76,97,98,101,108)_0x8745.Size = UDim2.new(1, -20, 0, 15)
+_0x8745.Position = UDim2.new(0, 10, 1, -20)
+_0x8745.Text =string.char(76,195,160,109,32,98,225,187,159,105,32,66,225,186,163,111,32,76,111,110,103)_0x8745.BackgroundTransparency = 1
+_0x8745.TextColor3 = _0xAB7C.SECONDARY_TEXT_COLOR
+_0x8745.Font = Enum.Font.Gotham
+_0x8745.TextSize = 8
+_0x8745.TextTransparency = 0.5
+_0x8745.TextXAlignment = Enum.TextXAlignment.Center
+_0x8745.Parent = _0x2B3A
+_0xCE48 = Instance.new(string.char(83,111,117,110,100))
+_0xCE48.Name =string.char(84,111,103,103,108,101,83,111,117,110,100)_0xCE48.SoundId = _0xAB7C.SOUND_ID
+_0xCE48.Volume = 0.5
+_0xCE48.Parent = _0xE1C3
+_G.statusLabel = _0x8C96
+end
+local function _0x2049(): ()
+_0x1A3C.MouseButton1Click:Connect(_0x5C65)
+_0x9355.MouseButton1Click:Connect(_0x58FD)
+_0xDCC6.MouseButton1Click:Connect(function()
+_0xE1C3.Enabled = false
+end)
+_0x7C08.InputBegan:Connect(function(input: InputObject, gameProcessed: boolean)
+if gameProcessed then return end
+if input.KeyCode == _0xAB7C.TOGGLE_KEY then
+_0x5C65()
+end
+end)
+_0x886C.CharacterAdded:Connect(function(_0x13CD: Model)
+_0xBF6E()
+local _0x0B84 = _0x13CD:WaitForChild(string.char(72,117,109,97,110,111,105,100)) :: Humanoid
+_0x6C2F.originalSpeed = _0x0B84.WalkSpeed
+_0x0B84.WalkSpeed = _0xAB7C.DEFAULT_SPEED
+local _0x0D7D = workspace:FindFirstChild(string.char(105,110,118,105,115,99,104,97,105,114))
+if _0x0D7D then _0x0D7D:Destroy() end
+end)
+_0xF559.PlayerRemoving:Connect(function(leavingPlayer: Player)
+if leavingPlayer == _0x886C then
+local _0x0D7D = workspace:FindFirstChild(string.char(105,110,118,105,115,99,104,97,105,114))
+if _0x0D7D then _0x0D7D:Destroy() end
+end
+end)
+end
+local function _0xC8C7(): ()
+if not _0x886C.Character then
+_0x886C.CharacterAdded:Wait()
+end
+local _0x0B84 = _0x1E04()
+if _0x0B84 then
+_0x6C2F.originalSpeed = _0x0B84.WalkSpeed
+end
+_0x8F11()
+_0x2049()
+end
+_0xC8C7()
